@@ -1,0 +1,72 @@
+Product Requirements Document (PRD)
+1. Introduction
+1.1 Purpose
+This document outlines the requirements for a web application built using Streamlit and Python that extracts data from user-provided PDFs, parses the data, and fills out an editable PDF template. The application should support both Nepali and English languages, bulk processing of PDFs, and allow users to download the filled PDFs with a specific naming convention.
+1.2 Scope
+Extract data from PDFs containing both Nepali and English text.
+Parse and fill an editable PDF template.
+Support bulk processing of PDFs.
+Download filled PDFs with a specific naming convention (File name +output).
+2. Functional Requirements
+2.1 User Interface
+Home Page: A simple landing page with instructions and a file upload button.
+Upload Section: Users can upload one or multiple PDFs.
+Processing Section: Users can initiate the data extraction and filling process.
+Download Section: Users can download the filled PDFs.
+2.2 Data Extraction
+PDF Parsing: The application should be able to read and extract data from PDFs like sample.pdf.
+Language Support: Support for both Nepali and English text extraction.
+Data Fields: Extract fields such as Name, Date of Birth, Gender, Citizenship No, Address, etc.
+Bulk Processing: Support for uploading and processing multiple PDFs simultaneously.
+2.3 Data Parsing and Filling
+Template Matching: Match extracted data with fields in the EditablePdf.pdf template.
+Field Mapping: Map extracted data to corresponding fields in the editable PDF.
+Error Handling: Handle cases where data fields do not match or are missing.
+Language Handling: Ensure that both Nepali and English text are correctly parsed and filled.
+2.4 Download Filled PDFs
+Naming Convention: Downloaded files should follow the naming convention File name +output.
+Bulk Download: Support for downloading multiple filled PDFs at once.
+3. Technical Requirements
+3.1 Technology Stack
+Frontend: Streamlit for building the web application.
+Backend: Python for data extraction and PDF manipulation.
+Libraries: PyPDF2 or PDFMiner for PDF extraction, ReportLab or PyPDF2 for filling PDFs.
+Language Support: Libraries capable of handling both Nepali and English text (e.g., PyMuPDF).
+3.2 Data Extraction
+PDF Extraction: Use libraries to extract text from PDFs, ensuring support for both Nepali and English.
+Data Parsing: Parse the extracted text to identify and extract relevant fields.
+Language Detection: Implement language detection to handle text extraction accurately.
+3.3 PDF Filling
+Editable PDF: Use libraries to fill out the EditablePdf.pdf template.
+Field Mapping: Map extracted data to the appropriate fields in the PDF template.
+Language Handling: Ensure that both Nepali and English text are correctly filled into the PDF.
+3.4 Bulk Processing
+Concurrency: Handle multiple PDFs simultaneously.
+Efficiency: Optimize for performance to handle bulk uploads efficiently.
+4. User Stories
+4.1 Single PDF Processing
+Scenario: User uploads a single PDF, the application extracts data, fills the editable PDF, and allows the user to download the filled PDF.
+Acceptance Criteria: The filled PDF should have all the extracted data correctly mapped to the fields.
+4.2 Bulk PDF Processing
+Scenario: User uploads multiple PDFs, the application processes each PDF, fills the editable PDFs, and allows the user to download all filled PDFs.
+Acceptance Criteria: Each filled PDF should have the correct data and follow the naming convention File name +output.
+5. Non-Functional Requirements
+5.1 Performance
+Response Time: The application should process and fill PDFs within a reasonable time frame.
+Scalability: The application should handle a large number of PDFs efficiently.
+5.2 Usability
+User-Friendly Interface: The application should have a simple and intuitive interface.
+Clear Instructions: Provide clear instructions for users on how to upload and process PDFs.
+5.3 Security
+Data Privacy: Ensure that user data is handled securely.
+File Handling: Ensure that uploaded files are stored and processed securely.
+6. Implementation Plan
+6.1 Development Phases
+Phase 1: Develop the basic web application using Streamlit.
+Phase 2: Implement data extraction and parsing functionality, ensuring support for both Nepali and English.
+Phase 3: Implement PDF filling and download functionality.
+Phase 4: Implement bulk processing and error handling.
+Phase 5: Testing and deployment.
+6.2 Testing
+Unit Testing: Test individual components for functionality.
+Integration Testing: Test the integration of data extraction, parsing, and PDF filling.

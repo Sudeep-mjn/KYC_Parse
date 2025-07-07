@@ -1,0 +1,69 @@
+
+
+
+import streamlit as st
+import fitz  # PyMuPDF
+import re
+import tempfile
+import os
+from datetime import datetime
+from pathlib import Path
+import io
+
+# =============================================================================
+# COMPREHENSIVE FIELD MAPPING CONFIGURATION FOR EditablePdf.pdf
+# =============================================================================
+
+# Personal Information Field Mappings
+PERSONAL_INFO_MAPPINGS = {
+    'name': {
+        'pattern': r'(?:Client Full Name|Name)\s*:\s*([A-Z][A-Z\s]+?)(?=\s*(?:DATE OF BIRTH|Gender|Father|Mother|$|\n))',
+        'target_field': 'Name In Block Letter',
+        'description': 'Client Full Name',
+        'transformation': 'uppercase'
+    },
+    'date_of_birth_ad': {
+        'pattern': r'Date of Birth\s+AD\s*:\s*(\d{4}-\d{2}-\d{2})',
+        'target_field': 'O    A D',
+        'description': 'Date of Birth (AD Format)',
+        'transformation': 'date_format'
+    },
+    'date_of_birth_bs': {
+        'pattern': r'Date of Birth\s+BS\s*:\s*(\d{4}-\d{2}-\d{2})',
+        'target_field': 'la  B S',
+        'description': 'Date of Birth (BS Format)',
+        'transformation': 'date_format'
+    },
+    'gender_male': {
+        'pattern': r'Gender\s*:\s*(M)',
+        'target_field': 'MaleTick',
+        'description': 'Gender - Male',
+        'transformation': 'gender_checkbox_male'
+    },
+    'gender_female': {
+        'pattern': r'Gender\s*:\s*(F)',
+        'target_field': 'FemaleTick',
+        'description': 'Gender - Female',
+        'transformation': 'gender_checkbox_female'
+    },
+    'citizenship_no': {
+        'pattern': r'Citizenship No[:\s]+(\d+(?:/\d+)?)',
+        'target_field': 'CitizenshipNo',
+        'description': 'Citizenship Number',
+        'transformation': 'none'
+    },
+    'citizenship_issue_district': {
+        'pattern': r'Citizenship Issue District\s*:\s*([A-Za-z\s]+?)(?=\s*(?:Issue Date|Date|$|\n))',
+        'target_field': 'IssueDistrict',
+        'description': 'Citizenship Issue District',
+        'transformation': 'title_case'
+    },
+    'citizenship_issue_date': {
+        'pattern': r'Issue Date\s*:\s*(\d{4}-\d{2}-\d{2})',
+        'target_field': 'hfL ldlt Issue Date',
+        'description': 'Citizenship Issue Date',
+        'transformation': 'date_format'
+    }
+}
+
+# Address Information Field Mappings
